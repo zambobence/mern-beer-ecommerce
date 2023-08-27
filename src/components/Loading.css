@@ -1,0 +1,47 @@
+.loading-component {
+    top: 0;
+    z-index: 999;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(50, 36, 10, 0.4);
+}
+
+.loading-animation-container {
+    background-color: #504c475c;
+    padding: 4rem;
+    border-radius: 3rem;
+    width: 60%;
+    max-width: 400px;
+    margin: 20% auto;
+    border: 2px solid #b0b0b0;
+}
+
+.loading-img {
+    max-width: 30%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    animation: float 3s infinite; /* Set animation duration and make it infinite */
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(-10%);
+    }
+
+    50% {
+        transform: translateY(0%);
+    }
+}
+
+.loading-animation-container h2 {
+    text-align: center;
+    animation: color-change 5s infinite;
+}
+
+@keyframes color-change {
+  0% { color: #E99002; }
+  50% { color: rgb(37, 36, 36); }
+  100% { color: #E99002; }
+}
