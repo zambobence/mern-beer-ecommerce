@@ -5,14 +5,9 @@ import {
   Flex,
   Avatar,
   HStack,
-  Text,
   IconButton,
   Button,
   Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
   useDisclosure,
   useColorModeValue,
   Stack,
@@ -23,6 +18,7 @@ import CartIcon from './Cart/CartIcon'
 import { useSelector, useDispatch } from 'react-redux'
 import Logo from './Logo'
 import { authSliceActions } from '../store/auth/authSlice'
+import { cartSliceActions } from '../store/cart/cartSlice'
 
 
 const NavLinkComponent = (props) => {
@@ -72,6 +68,7 @@ export default function NavBar() {
 
   const handleLogout = () => {
     dispatch(authSliceActions.logout())
+    dispatch(cartSliceActions.emptyCart())
     navigate('/auth?mode=login')
   }
 

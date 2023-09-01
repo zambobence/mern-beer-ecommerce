@@ -3,6 +3,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { authSliceActions } from '../../store/auth/authSlice'
 import { Form, Navigate, useNavigate } from 'react-router-dom'
+import { cartSliceActions } from '../../store/cart/cartSlice'
 
 export default function ProfileDetails({user}) {
     const dispatch = useDispatch()
@@ -10,6 +11,7 @@ export default function ProfileDetails({user}) {
 
     const handleLogout = () => {
         dispatch(authSliceActions.logout())
+        dispatch(cartSliceActions.emptyCart())
         navigate('/auth?mode=login')
     }
     

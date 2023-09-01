@@ -12,9 +12,12 @@ import { Form, json, redirect } from 'react-router-dom'
 import { cartSliceActions } from '../store/cart/cartSlice'
 import { uiSliceActions } from '../store/ui/uiSlice'
 import Container from './Container'
+import { useActionData } from 'react-router-dom'
+import ErrorComponent from '../shared/components/ErrorComponent'
 
 export default function CheckoutPage() {
   const paymentOptions = ['Credit card', 'Cash payment']
+  const data = useActionData()
 
   const {
     selectState,
@@ -27,7 +30,8 @@ export default function CheckoutPage() {
     hasError: streetAddressHasError,
     inputChangeHandler: streetAddressChangeHandler,
     inputBlurHandler: streetAddressBlurHandler,
-    resetInput: resetStreetAddress
+    resetInput: resetStreetAddress,
+    isInvalid: streetAddressIsInvalid
   } = useInput((value) => value.trim()!=="" && value.trim())
 
   const {
@@ -35,55 +39,40 @@ export default function CheckoutPage() {
     hasError: postalCodeHasError,
     inputChangeHandler: postalCodeChangeHandler,
     inputBlurHandler: postalCodeBlurHandler,
-    resetInput: resetPostalCode
+    resetInput: resetPostalCode,
+    isInvalid: postalCodeIsInvalid
   } = useInput((value) => value.trim()!=="")
   const {
     value: cityValue,
     hasError: cityHasError,
     inputChangeHandler: cityChangeHandler,
     inputBlurHandler: cityBlurHandler,
-    resetInput: resetCity
+    resetInput: resetCity,
+    isInvalid: cityIsInvalid
   } = useInput((value) => value.trim()!=="")
 
 
   const {cart, auth} = useSelector((state) => state)
   const cartItems = cart.items.map( e => <CartItem key={e.id} item={e} />)
 
-  const totalAmount = cart.totalAmount
-  const productList = cart.items
-  const date = new Date()
-
-  const deliveryAddress = {
-    streetAddress: streetAddressValue,
-    postalCode: postalCodeValue,
-    city: cityValue
-  };
-
+  
   const orderData = {
     paymentMethod: selectState.value,
-    deliveryAddress,
-    productList,
-    totalAmount,
-    date
+    streetAddressValue,
+    cityValue,
+    postalCodeValue,
+    productList: cart.items,
+    totalAmount: cart.totalAmount
   }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/checkout`, {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth.token}`
-      },
-      body: JSON.stringify(orderData)
-    })
-    console.log(response)
-    const responseData = await response.json()
-    console.log(responseData)
-  }
+  let isCheckoutDisabled = true
+  isCheckoutDisabled = Object.values(orderData).some(e => e === "")
+
 
   return (
     <Container px={5}>
+      {data && data.errors &&  <ErrorComponent data={data} /> }    
+
     <Grid templateColumns={"repeat(12, 1fr)"} columnGap={{base: ".5rem", md: "4rem"}}>
         <GridItem colSpan={"12"}>
           <Heading as={"h2"} margin={".5em 0"}>Checkout details</Heading>
@@ -100,7 +89,7 @@ export default function CheckoutPage() {
           <InputComponent margin={".25em 0"} value={streetAddressValue} isInvalid={streetAddressHasError} handleChange={streetAddressChangeHandler} handleBlur={streetAddressBlurHandler} label={"Street Address"} name={"streetAddress"} errorMsg="Please pvoide a valid street address" placeholder="1 Main Street" />
           <InputComponent margin={".25em 0"} value={postalCodeValue} isInvalid={postalCodeHasError} handleChange={postalCodeChangeHandler} handleBlur={postalCodeBlurHandler} label={"Postal Code"} name={"postalCode"}errorMsg="Please provide a postal code" placeholder="1111" />
           <InputComponent margin={".25em 0"} value={cityValue} isInvalid={cityHasError} handleChange={cityChangeHandler} handleBlur={cityBlurHandler} label={"City"} errorMsg="Please provide a validity city" placeholder="London" />
-          <Button type="submit" margin={"1rem 0"}>Checkout</Button>
+          <Button type="submit" margin={"1rem 0"} colorScheme='brand' isDisabled={isCheckoutDisabled}>Checkout</Button>
         </Form>
       </GridItem>
     </Grid>
@@ -127,6 +116,10 @@ export const action = async ({request, params}) => {
     productList: cart.items,
     totalAmount: cart.totalAmount,
     date: new Date()
+  }
+
+  if (!Object.values(orderData).some(e => e ==="")){
+
   }
 
   const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/checkout`, {

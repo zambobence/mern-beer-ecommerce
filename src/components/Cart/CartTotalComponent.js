@@ -11,7 +11,6 @@ export default function CartTotalComponent(props) {
         templateColumns={"repeat(6, 1fr)"}
         gap={"1rem"}
         marginTop={"auto"}
-        bgColor={"red"}
     >
         <GridItem colSpan={3}>
             <Heading as={"h4"} fontSize={"1.8rem"}>Subtotal</Heading>

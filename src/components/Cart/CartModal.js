@@ -31,7 +31,7 @@ function BasicUsage() {
   }
 
     const cart = useSelector((state) => state.cart)
-    const cartItems = cart.items.map( e => <CartItem key={e.id} item={e} />)
+    const cartItemsComponent = cart.items.map( e => <CartItem key={e.id} item={e} />)
 
     return (
       <>
@@ -41,12 +41,12 @@ function BasicUsage() {
             <ModalHeader>Cart</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-                {cartItems}
+                {cartItemsComponent}
                 <Divider />
                 <CartTotalComponent />
             </ModalBody>
             <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={handleCheckout}>
+              <Button colorScheme='brand' mr={3} onClick={handleCheckout} isDisabled={cart.items.length === 0}>
                 Checkout
               </Button>
               <Button variant='ghost' onClick={handleCloseCart}>Cancel</Button>

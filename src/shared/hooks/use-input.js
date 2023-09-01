@@ -39,6 +39,7 @@ export default function useInput(validator, initialValue) {
     return {
         value: inputState.value,
         hasError,
+        isValid,
         inputChangeHandler,
         inputBlurHandler,
         resetInput
