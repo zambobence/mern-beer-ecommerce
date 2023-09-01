@@ -1,7 +1,5 @@
 # Beer Commerce App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Short description
 A mock e-commerce site I built to practice and showcase the skills I have learned with React Router v6 and Redux.',
 
