@@ -7,7 +7,7 @@ export default function EditProductDetails() {
     const data = useRouteLoaderData('product-detail')
     const productData = data.product
   return (
-    <div>EditProductDetails
+    <div>
         <ProductFormComponent method={"PATCH"} productData={productData} />
     </div>
   )

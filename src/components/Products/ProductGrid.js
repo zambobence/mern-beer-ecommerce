@@ -1,10 +1,10 @@
 import React from 'react'
 import ProductCard from './ProductCard'
-import { Heading, SimpleGrid, Box } from '@chakra-ui/react'
+import { Heading, SimpleGrid, Box, VStack } from '@chakra-ui/react'
 export default function ProductGrid({products}) {
 
-    if (products.lengh === 0 || !products){
-        return <Box><Heading>No products found</Heading></Box>
+    if (products.length === 0 || !products){
+        return (<VStack minHeight={"70vh"} justifyContent={"center"}><Heading>No products found</Heading></VStack>)
     }
 
     const productCards = products.map(e => <ProductCard key={e.id} product={e} />)

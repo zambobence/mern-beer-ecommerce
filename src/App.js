@@ -1,27 +1,30 @@
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-
 import DefaultLayout from './layout/DefaultLayout';
-
 import Home from './pages/Home';
 import AddProduct from './pages/AddProduct';
-import Profile from './pages/Profile';
+import Profile from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
-import ProductDetails from './pages/ProductDetailsPage';
+import ProductDetailsPage from './pages/ProductDetailsPage';
 import EditProductDetails from './pages/EditProductDetails';
 import AuthenticationPage from './pages/AuthenticationPage';
-import Loading from './components/Loading'
+import Welcome from './pages/Welcome';
 
 import {loader as productsLoader} from './pages/Home'
-import ProductDetailsPage, {loader as productDetailLoader} from './pages/ProductDetailsPage'
+import {loader as productDetailLoader} from './pages/ProductDetailsPage'
 import {action as manipulateProductAction } from './components/Products/ProductFormComponent'
 import {action as deleteProductAction} from './pages/ProductDetailsPage'
 import {action as authAction} from './pages/AuthenticationPage'
-
-import './App.css';
-import Welcome from './pages/Welcome';
+import {loader as profileLoader} from './pages/ProfilePage'
+import {action as checkoutAction} from './pages/CheckoutPage'
+import {action as deleteProfileAction} from './pages/ProfilePage'
 import { checkAuth } from './util/auth';
 
+import ProtectedRoutes from './ProtectedRoutes';
+import CheckoutPage from './pages/CheckoutPage';
+import './App.css';
+
 function App() {
+
 
 
   const router = createBrowserRouter([
@@ -40,8 +43,18 @@ function App() {
           element: <Welcome />
         },
         { path: 'profile',
-          element: <Profile />,
-          loader: checkAuth
+          element: (
+          <ProtectedRoutes>
+            <Profile />
+          </ProtectedRoutes>
+          ),
+          loader: profileLoader,
+          action: deleteProfileAction
+        },
+        { path: 'checkout',
+          element: <CheckoutPage />,
+          loader: checkAuth,
+          action: checkoutAction
         },
         {
           path: 'auth',

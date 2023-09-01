@@ -3,8 +3,10 @@ import React from 'react'
 import { cartSliceActions } from '../../store/cart/cartSlice'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { LazyLoadImage, LazyLoad } from 'react-lazy-load-image-component'
-import 'react-lazy-load-image-component/src/effects/opacity.css'; // Import desired transition effect
+import ProductImage from './ProductImage'
+import ProductDescription from './ProductDescription'
+import ProductTitle from './ProductTitle'
+import PriceComponent from './PriceComponent'
 
 export default function ProductCard({product}) {
 
@@ -14,23 +16,14 @@ export default function ProductCard({product}) {
     }
 
   return (
-    <Card overflow={'hidden'} >
+    <Card overflow={'hidden'} key={product._id} maxWidth={"400px"}>
         <CardBody>
-        <Link to={`/product/${product.id}`}>
-            <LazyLoadImage
-                effect="opacity"
-                src={`https://source.unsplash.com/random/400x400/?${product.image}`}
-                alt={product.title}
-             />
+        <Link to={`/product/${product._id}`}>
+            <ProductImage src={product.image} alt={product.title} />
             <Divider />
             <Stack>
-                <Heading as='h3' fontSize={'1.4rem'}>
-                    {product.title}
-                </Heading>
-                <Text>
-                    {product.description}
-                </Text>
-
+                <ProductTitle as='h2' fontSize={'1.4rem'} title={product.title} margin={".75rem 0 0"}/>
+                <ProductDescription noOfLines={3} description={product.description} />
             </Stack>
         </Link>
         </CardBody>
@@ -39,9 +32,7 @@ export default function ProductCard({product}) {
                 <Button variant='ghost' colorScheme='blue' border={'1px solid'} onClick={handleAddToCart}>
                     Add to cart
                 </Button>
-                <Text color='blue.600' fontSize='1.4rem' marginBottom={"0"}>
-                    $ {product.price}
-                </Text>
+                <PriceComponent price={product?.price} color={'blue.600'} fontSize={'1.4rem'} marginBottom={"0"} />
             </HStack>
         </CardFooter>
     </Card>

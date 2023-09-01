@@ -1,11 +1,9 @@
 import React from 'react'
 import { useLoaderData, json, useNavigate } from 'react-router-dom'
 import ProductGrid from '../components/Products/ProductGrid'
-import toggleLoading from '../util/toggleLoading'
-import Loading from '../components/Loading'
 
 export const loader = async () => {
-  const response = await fetch('http://localhost:8000/products')
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/products`)
   if (!response.ok){
       throw json(
       {message: "Could not fetch products"},

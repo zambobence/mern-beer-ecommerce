@@ -14,19 +14,25 @@ import {
 import CartItem from '../Cart/CartItem'
 import { uiSliceActions } from '../../store/ui/uiSlice'
 import CartTotalComponent from './CartTotalComponent'
-import { cartSliceActions } from '../../store/cart/cartSlice'
+import { useNavigate } from 'react-router-dom'
 
 function BasicUsage() {
-    const dispatch = useDispatch()
-    const {cartShown} = useSelector((state) => state.ui)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const {cartShown} = useSelector((state) => state.ui)
 
-    const handleCloseCart = () => {
-        dispatch(uiSliceActions.toggleCart())
-    }
+  const handleCloseCart = () => {
+    dispatch(uiSliceActions.toggleCart())
+  }
+
+  const handleCheckout = () => {
+    dispatch(uiSliceActions.toggleCart())
+    navigate('/checkout')
+  }
 
     const cart = useSelector((state) => state.cart)
-
     const cartItems = cart.items.map( e => <CartItem key={e.id} item={e} />)
+
     return (
       <>
         <Modal isOpen={cartShown} onClose={handleCloseCart}>
@@ -40,10 +46,10 @@ function BasicUsage() {
                 <CartTotalComponent />
             </ModalBody>
             <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={handleCloseCart}>
+              <Button colorScheme='blue' mr={3} onClick={handleCheckout}>
                 Checkout
               </Button>
-              <Button variant='ghost'>Secondary Action</Button>
+              <Button variant='ghost' onClick={handleCloseCart}>Cancel</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

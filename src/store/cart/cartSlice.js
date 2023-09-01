@@ -73,6 +73,9 @@ const cartSlice = createSlice({
                 state.totalAmount = totalAmountReducer(state.items)
                 state.totalProducts = totalProductsReducer(state.items)
             }
+        },
+        emptyCart(state, action){
+            state = {...initialState}
         }
     }
 })
@@ -144,8 +147,8 @@ export const fetchCart = () => {
             console.log(err)
             dispatch(uiSliceActions.setNotification({
                 status: "error",
-                notiTitle: err.message,
-                notiDetails: err.message,
+                notiTitle: err.msg,
+                notiDetails: err.msg,
                 visible: true
             }))
         }

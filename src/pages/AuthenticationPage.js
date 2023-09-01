@@ -13,25 +13,21 @@ export default function AuthenticationPage() {
 }
 
 export const action = async ({request, params}) => {
-    console.log('Within action')
     // we wanto to get hold of the form data
     // the input data has to have their names
     const data = await request.formData()
     const formData = {
         email: data.get('email'),
-        password: data.get('password')
+        password: data.get('password'),
+        confirmPassword: data.get('confirmPassword')
     }
-
-    console.log(formData)
-    // With default browser features we access the search parameters
     
+    // With default browser features we access the search parameters
+
     const searchParams = new URL(request.url).searchParams
-    console.log(searchParams)
     let mode = searchParams.get('mode') || 'login'
 
-    console.log(mode)
-
-    const url = 'http://localhost:8000/' + mode 
+    const url = `${process.env.REACT_APP_BACKEND_URL}/${mode}`
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -39,7 +35,7 @@ export const action = async ({request, params}) => {
         },
         body: JSON.stringify(formData)
     })
-    console.log(response)
+
     if (response.status === 422){
         return response
     }
@@ -48,9 +44,19 @@ export const action = async ({request, params}) => {
         return response
     }
 
+    if(response.status === 404){
+        return response
+    }
+
     if (!response.ok){
         throw json({message: 'Could not authenticate user!'}, {status: 500})
     }
-    store.dispatch(authSliceActions.login())
+    const responseData = await response.json()
+    store.dispatch(authSliceActions.login(
+        {
+            token: responseData?.user.token,
+            uid: responseData?.user.uid
+        }
+    ))
     return redirect ('/welcome')
 }

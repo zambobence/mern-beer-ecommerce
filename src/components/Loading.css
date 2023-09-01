@@ -41,7 +41,7 @@
 }
 
 @keyframes color-change {
-  0% { color: #E99002; }
+  0% { color: brand.200; }
   50% { color: rgb(37, 36, 36); }
-  100% { color: #E99002; }
+  100% { color: brand.200; }
 }

@@ -10,20 +10,22 @@ import { fetchCart } from '../store/cart/cartSlice'
 import { useNavigation } from 'react-router-dom'
 import LoadingAnimation from '../components/Loading'
 import Loading from '../components/Loading'
+import { uiSliceActions } from '../store/ui/uiSlice'
 const DefaultLayout = () => {
 
     const navigation = useNavigation()
     const {notification} = useSelector(state => state.ui)
     const dispatch = useDispatch()
 
-    const handleFetchCart = () => {
-        dispatch(fetchCart())
-    }
-/*
     useEffect(() => {
-        handleFetchCart()
+      const removeAlert = () => {
+        setTimeout(()=> {
+          dispatch(uiSliceActions.hideNotification())
+        }, 2000)
+      }
+
+      removeAlert()
     },[])
-*/
 
     return (
     <>

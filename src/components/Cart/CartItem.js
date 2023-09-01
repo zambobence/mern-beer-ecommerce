@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import useNotification from '../../shared/hooks/use-notification'
 import { cartSliceActions } from '../../store/cart/cartSlice'
 import { Heading, Grid, Text, Button, VStack,HStack, Image, Spacer, Flex, GridItem, Center } from '@chakra-ui/react'
+import PriceComponent from '../Products/PriceComponent'
 
 export default function CartItem({item}) {
     const dispatch = useDispatch()
@@ -48,7 +49,7 @@ export default function CartItem({item}) {
             </GridItem>
             <GridItem colSpan={"1"}>
                 <VStack alignItems={"flex-end"}>
-                    <Text>{item.price}</Text>
+                    <PriceComponent price={item?.price} />
                     <Text color="red" onClick={handleRemoveFromCart}>Remove</Text>
                 </VStack>
             </GridItem>

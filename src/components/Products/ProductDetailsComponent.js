@@ -1,7 +1,14 @@
-import { GridItem, Heading, Grid, Image, Input, Text, Box, VStack, Divider, HStack, Button, useStatStyles } from '@chakra-ui/react'
 import React, {useState} from 'react'
+import { GridItem, Heading, Grid, Image, Input, Text, Box, Icon, Divider, HStack, Button, useStatStyles, Flex } from '@chakra-ui/react'
 import { useDispatch } from 'react-redux'
 import { cartSliceActions } from '../../store/cart/cartSlice'
+import AddFavourite from './AddFavourite'
+import ReviewComponent from './ReviewComponent'
+import CategoryComponent from './CategoryComponent'
+import ProductImage from './ProductImage'
+import ProductDescription from './ProductDescription'
+import ProductTitle from './ProductTitle'
+import AddToCartComponent from './AddToCartComponent'
 
 export default function ProductDetailsComponent({product}) {
 
@@ -17,37 +24,27 @@ export default function ProductDetailsComponent({product}) {
     }
 
   return (
-    <Grid templateColumns={'repeat(12, 1fr)'} gap={"1.5em"}>
+    <Grid templateColumns={'repeat(12, 1fr)'} gap={"1.5em"} justifyItems={'stretch'} marginY={'1rem'}>
         <GridItem colSpan={{base: '12', md: '5'}}>
-            <Box>
-            <Image
-                src={`http://source.unsplash.com/random/?${product.image}`}
-                alt={product.title}
-            />
-            </Box>
+        <ProductImage src={product.image} alt={product.title} />
         <Divider />
         </GridItem>
         <GridItem colSpan={{base: '12', md: '7'}}>
-            <VStack alignItems={"flex-start"}>
-            <Heading as={"h2"}>
-                {product.title}
-            </Heading>
-            <Text fontSize={"1.5rem"}>
-                {product.description}
-            </Text>
-            <Heading as={"h4"} fontSize={"1.7rem"}>
-                Category: {product.category}
-            </Heading>
-            <HStack>
-                <Input name="qty" type="number" value={qty} onChange={handleChangeQty} />
-                <Button variant='ghost' colorScheme='blue' border={'1px solid'} onClick={handleAddToCart}>
-                    Add to cart
-                </Button>
-                <Text color='blue.600' fontSize='1.4rem' marginBottom={"0"}>
-                    $ {product.price}
-                </Text>
-            </HStack>
-            </VStack>
+            <Flex flexDirection={"column"} height={{base: 'auto', md:'100%'}} maxWidth={"450px"} spacing={3}>
+                <ProductTitle title={product.title} fontSize={'1.8rem'} />
+                <ReviewComponent />
+                <CategoryComponent category={product.category} />
+                <ProductDescription description={product.description} marginY={'1rem'} />
+                <AddToCartComponent
+                    value={qty}
+                    onClick={handleAddToCart}
+                    price={product.price}
+                    onChange={handleChangeQty}
+                />
+        {/*
+            <AddFavourite />
+        */}
+            </Flex>
         </GridItem>
     </Grid>
   )
