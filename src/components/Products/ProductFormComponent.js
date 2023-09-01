@@ -69,6 +69,18 @@ export default function ProductFormComponent({method, productData}) {
       }
     }
 
+    const productObj = {
+      titleValue,
+      priceValue,
+      imageValue,
+      category: selectState.value,
+      descriptionValue
+    }
+
+    let isButtonDisabled = true
+    isButtonDisabled = Object.values(productObj).some(e => e === "")
+
+
 
 
   return (
@@ -81,8 +93,8 @@ export default function ProductFormComponent({method, productData}) {
       <InputComponent value={imageValue} isInvalid={imageHasError} handleChange={imageChangeHandler} handleBlur={imageBlurHandler} label={"Image"} errorMsg="Please provide a valid image url" placeholder="Image Url" />
       <InputComponent value={descriptionValue} isInvalid={descriptionHasError} handleChange={descriptionChangeHandler} handleBlur={descriptionBlurHandler} label={"Description"} errorMsg="Please provide a valid description" placeholder="Product description." />
       <SelectComponent selectState={selectState} label={'Category'} options={categoryArray} onChange={handleChange} value={selectState.value} defaultValue={product?.category} isInvalid={selectHasError} errorMsg={'Please select a valid category!'} />
-    <ButtonGroup>
-      <Button type="submit" bgColor="brand.200">
+    <ButtonGroup marginY={"1rem"}>
+      <Button type="submit" colorScheme='brand' isDisabled={isButtonDisabled}>
         {method === "PATCH" ? "Save" : "Add product"}
       </Button>
       <Button onClick={handleCancel} bgColor="red.100">

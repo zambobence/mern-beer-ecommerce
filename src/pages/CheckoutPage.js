@@ -30,8 +30,7 @@ export default function CheckoutPage() {
     hasError: streetAddressHasError,
     inputChangeHandler: streetAddressChangeHandler,
     inputBlurHandler: streetAddressBlurHandler,
-    resetInput: resetStreetAddress,
-    isInvalid: streetAddressIsInvalid
+    resetInput: resetStreetAddress
   } = useInput((value) => value.trim()!=="" && value.trim())
 
   const {
@@ -39,8 +38,7 @@ export default function CheckoutPage() {
     hasError: postalCodeHasError,
     inputChangeHandler: postalCodeChangeHandler,
     inputBlurHandler: postalCodeBlurHandler,
-    resetInput: resetPostalCode,
-    isInvalid: postalCodeIsInvalid
+    resetInput: resetPostalCode
   } = useInput((value) => value.trim()!=="")
   const {
     value: cityValue,
@@ -48,7 +46,6 @@ export default function CheckoutPage() {
     inputChangeHandler: cityChangeHandler,
     inputBlurHandler: cityBlurHandler,
     resetInput: resetCity,
-    isInvalid: cityIsInvalid
   } = useInput((value) => value.trim()!=="")
 
 
