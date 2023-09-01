@@ -3,6 +3,7 @@ import {Button} from '@chakra-ui/react'
 import {Link, json, redirect, useRouteLoaderData, useSubmit } from 'react-router-dom'
 import ProductDetailsComponent from '../components/Products/ProductDetailsComponent'
 import { useSelector } from 'react-redux'
+import Container from './Container'
 
 export default function ProductDetailsPage() {
   let uid
@@ -26,7 +27,7 @@ export default function ProductDetailsPage() {
   }
 
   return (
-      <>
+      <Container px={5}>
         <ProductDetailsComponent product={product}/>
         {isAuthor && 
       ( <>
@@ -36,7 +37,7 @@ export default function ProductDetailsPage() {
       <Button onClick={handleDelete}>Delete</Button>
       </> )
         }
-      </>
+      </Container>
   )
 }
 

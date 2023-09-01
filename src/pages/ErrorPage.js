@@ -3,6 +3,7 @@ import { Heading, Grid, GridItem, Box, Text, Image } from '@chakra-ui/react';
 import NavBar from '../components/NavBar';
 import notFoundImg from '../assets/not_found.png'
 import { useRouteError } from 'react-router-dom'
+import Container from './Container';
 export default function ErrorPage() {
     const errorObject = useRouteError()
     let title = "Error";
@@ -17,6 +18,7 @@ export default function ErrorPage() {
         title = "Internal Server Error"
     }
   return (
+    <Container px={5}>
     <Grid
         templateColumns={'repeat(6, 1fr)'}
         backgroundImage={notFoundImg}
@@ -37,5 +39,6 @@ export default function ErrorPage() {
             </Box>
         </GridItem>
     </Grid>
+    </Container>
   )
 }

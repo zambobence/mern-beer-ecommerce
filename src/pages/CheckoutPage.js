@@ -11,6 +11,7 @@ import store from '../store/store'
 import { Form, json, redirect } from 'react-router-dom'
 import { cartSliceActions } from '../store/cart/cartSlice'
 import { uiSliceActions } from '../store/ui/uiSlice'
+import Container from './Container'
 
 export default function CheckoutPage() {
   const paymentOptions = ['Credit card', 'Cash payment']
@@ -68,7 +69,7 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const response = await fetch('http://localhost:8000/checkout', {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/checkout`, {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
@@ -82,6 +83,7 @@ export default function CheckoutPage() {
   }
 
   return (
+    <Container px={5}>
     <Grid templateColumns={"repeat(12, 1fr)"} columnGap={{base: ".5rem", md: "4rem"}}>
         <GridItem colSpan={"12"}>
           <Heading as={"h2"} margin={".5em 0"}>Checkout details</Heading>
@@ -102,6 +104,7 @@ export default function CheckoutPage() {
         </Form>
       </GridItem>
     </Grid>
+    </Container>
   )
 }
 
@@ -126,7 +129,7 @@ export const action = async ({request, params}) => {
     date: new Date()
   }
 
-  const response = await fetch('http://localhost:8000/checkout', {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/checkout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
 import { Grid, GridItem, Box } from '@chakra-ui/react'
-import SideBar from '../components/SideBar'
 import { useSelector, useDispatch } from 'react-redux'
 import AlertComponent from '../components/AlertUI/AlertComponent'
 import NavBar from '../components/NavBar'
 import { Outlet } from 'react-router-dom'
 import CartModal from '../components/Cart/CartModal'
-import { fetchCart } from '../store/cart/cartSlice'
 import { useNavigation } from 'react-router-dom'
-import LoadingAnimation from '../components/Loading'
 import Loading from '../components/Loading'
 import { uiSliceActions } from '../store/ui/uiSlice'
+import Footer from '../components/Footer/Footer'
 const DefaultLayout = () => {
 
     const navigation = useNavigation()
@@ -32,15 +30,16 @@ const DefaultLayout = () => {
     {notification.visible && <AlertComponent />}
     {navigation.state !== "idle" && <Loading />}
     <CartModal />
-    <Grid templateColumns={'repeat(6, 1fr)'}>
+    <Grid templateColumns={'repeat(6, 1fr)'} minH={"100vh"}>
         <GridItem colSpan={'6'}>
             <NavBar />
         </GridItem>
 
-        <GridItem colSpan={{base: '6', md: '6'}}>
-            <Box px={5}>
-                <Outlet />
-            </Box>
+        <GridItem colSpan={'6'}>
+          <Outlet />
+        </GridItem>
+        <GridItem colSpan={'6'}>
+          <Footer />
         </GridItem>
     </Grid>
     </>)

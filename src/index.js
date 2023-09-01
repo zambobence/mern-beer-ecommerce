@@ -11,12 +11,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = extendTheme({
   colors: {
     brand: {
-      100: "#e99002",
-      200: "#e99002",
-      300: "#e99002",
-      400: "#e99002",
-      500: "#e99002",
-      600: "#e99002",
+      100: "#FFF897",
+      200: "#FAE96F",
+      300: "#F6C101",
+      400: "#EC9D00",
+      500: "#DF8D03",
+      600: "#C96E12",
     },
   },
 })

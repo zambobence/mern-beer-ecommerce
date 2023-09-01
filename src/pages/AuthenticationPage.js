@@ -3,12 +3,13 @@ import {json, redirect} from 'react-router-dom'
 import AuthForm from '../components/AuthForm'
 import store from '../store/store'
 import { authSliceActions } from '../store/auth/authSlice'
+import Container from './Container'
 
 export default function AuthenticationPage() {
   return (
-    <div>
+    <Container px={"5"}>
         <AuthForm />
-    </div>
+    </Container>
   )
 }
 

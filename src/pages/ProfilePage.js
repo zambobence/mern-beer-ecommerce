@@ -6,13 +6,16 @@ import ProfileComponent from '../components/Profile/ProfileComponent'
 import useNotification from '../shared/hooks/use-notification'
 import { uiSliceActions } from '../store/ui/uiSlice'
 import { authSliceActions } from '../store/auth/authSlice'
+import Container from './Container'
 export default function ProfilePage() {
 
     const data = useLoaderData()
     const user = data?.user
 
   return (
-    <ProfileComponent user={user} />
+    <Container px={5}>
+      <ProfileComponent user={user} />
+    </Container>
   )
 }
 

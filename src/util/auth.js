@@ -8,5 +8,5 @@ export const checkAuth = () => {
     if (isLoggedIn){
         return null
     }
-    return redirect('/auth')
+    return redirect('/auth?mode=login')
 }
