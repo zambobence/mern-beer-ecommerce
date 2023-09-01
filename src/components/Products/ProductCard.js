@@ -12,6 +12,7 @@ import {useSelector} from 'react-redux'
 export default function ProductCard({product}) {
 
     const dispatch = useDispatch()
+
     const handleAddToCart = () => {
         dispatch(cartSliceActions.addToCart({product: product}))
     }
@@ -25,10 +26,12 @@ export default function ProductCard({product}) {
     const {isLoggedIn} = useSelector(state => state.auth)
 
   return (
-    <Card overflow={'hidden'} key={product._id} maxWidth={"400px"} _hover={{filter: "drop-shadow(0px 2px 1px grey)"}} cursor={"pointer"}>
+    <Card 
+        overflow={'hidden'} 
+        maxWidth={"400px"} _hover={{filter: "drop-shadow(0px 2px 1px grey)"}} cursor={"pointer"}>
         <CardBody>
         <Link to={`/product/${product._id}`}>
-            <ProductImage src={product.image} alt={product.title} />
+            <ProductImage src={product.image} alt={product.title}/>
             <Divider />
             <Stack>
                 <ProductTitle as='h2' fontSize={'1.4rem'} title={product.title} margin={".75rem 0 0"}/>

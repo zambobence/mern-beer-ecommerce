@@ -21,7 +21,7 @@ const cartSlice = createSlice({
             let qty
             qty = action.payload.qty || 1
             console.log('Qty: ', qty, typeof(qty))
-            const {id} = action.payload.product
+            const {_id: id} = action.payload.product
             console.log(id)
             console.log('State ', state.items)
             let item

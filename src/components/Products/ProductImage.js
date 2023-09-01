@@ -19,7 +19,9 @@ export default function ProductImage(props) {
             alt={props.alt}
             objectFit={"cover"}
             aspectRatio={"1"}
-            maxHeight={"450px"}
+            maxHeight={props.maxHeight || "450px"}
+            maxWidth={props.maxWidth}
+            borderRadius={props.borderRadius}
         />
     </Box>
   )

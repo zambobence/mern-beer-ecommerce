@@ -4,6 +4,7 @@ import useNotification from '../../shared/hooks/use-notification'
 import { cartSliceActions } from '../../store/cart/cartSlice'
 import { Heading, Grid, Text, Button, VStack,HStack, Image, Spacer, Flex, GridItem, Center } from '@chakra-ui/react'
 import PriceComponent from '../Products/PriceComponent'
+import ProductImage from '../Products/ProductImage'
 
 export default function CartItem({item}) {
     const dispatch = useDispatch()
@@ -28,12 +29,7 @@ export default function CartItem({item}) {
             m={"1rem 0"}
         >
             <GridItem colSpan={"2"}>
-                <Image
-                    src={`https://source.unsplash.com/random/400x400/?${item.image}`}
-                    alt={item.title}
-                    borderRadius='lg'
-                    maxWidth={"120px"}
-                />
+                <ProductImage src={item.image} alt={item.title} borderRadius={".3rem"}/>
             </GridItem>
             <GridItem colSpan={"2"}>
                 <Heading as="h4" fontSize={"1.2rem"}>

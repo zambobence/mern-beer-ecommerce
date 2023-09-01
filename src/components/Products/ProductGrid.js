@@ -7,7 +7,7 @@ export default function ProductGrid({products}) {
         return (<VStack minHeight={"70vh"} justifyContent={"center"}><Heading>No products found</Heading></VStack>)
     }
 
-    const productCards = products.map(e => <ProductCard key={e.id} product={e} />)
+    const productCards = products.map(e => <ProductCard key={e._id} product={e} />)
 
     return (
         <SimpleGrid minChildWidth={"230px"} gap={".75rem"}>

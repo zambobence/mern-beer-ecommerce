@@ -17,7 +17,7 @@ export default function Welcome() {
         </Box>
         <Box margin={"2rem 0 3rem"}>
           <Heading as={"h2"} color={"brand.300"} fontWeight={500} fontSize={'1.4em'} textAlign={{base: "right", md: "left"}} marginY={".3rem"}>Frontend</Heading>
-          <Text>The frontend UI is built with ChakraUI, the app-wide states are managed by Redux, for the data fetching and sneidng requests I have used the React Router action and loader features.</Text>
+          <Text>The frontend UI is built with ChakraUI, the app-wide states are managed by Redux, for the data fetching and sending requests I have used the React Router action and loader features.</Text>
           <Text>Users can register add their own products and purchase new products, furthermore it also stores their previous orders</Text>
         </Box>
         <Button bgColor={"brand.300"}><Link to="/products">Take a look</Link></Button>
