@@ -26,8 +26,8 @@ export default function ProductCard({product}) {
     const {isLoggedIn} = useSelector(state => state.auth)
 
   return (
-    <Card 
-        overflow={'hidden'} 
+    <Card
+        overflow={'hidden'}
         maxWidth={"400px"} _hover={{filter: "drop-shadow(0px 2px 1px grey)"}} cursor={"pointer"}>
         <CardBody>
         <Link to={`/product/${product._id}`}>

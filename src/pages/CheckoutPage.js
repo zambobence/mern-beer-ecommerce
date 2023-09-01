@@ -134,7 +134,7 @@ export const action = async ({request, params}) => {
 
   const responseData = await response.json()
   console.log(responseData)
-  store.dispatch(cartSliceActions.emptyCart)
+  store.dispatch(cartSliceActions.emptyCart())
   store.dispatch(uiSliceActions.setNotification({
     status: "success",
     notiTitle: "Successfully added order",
