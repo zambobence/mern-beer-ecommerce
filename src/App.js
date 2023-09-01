@@ -1,6 +1,5 @@
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import DefaultLayout from './layout/DefaultLayout';
-import Home from './pages/Home';
 import AddProduct from './pages/AddProduct';
 import Profile from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
@@ -9,7 +8,7 @@ import EditProductDetails from './pages/EditProductDetails';
 import AuthenticationPage from './pages/AuthenticationPage';
 import Welcome from './pages/Welcome';
 
-import {loader as productsLoader} from './pages/Home'
+import ProductsPage, {loader as productsLoader} from './pages/ProductsPage'
 import {loader as productDetailLoader} from './pages/ProductDetailsPage'
 import {action as manipulateProductAction } from './components/Products/ProductFormComponent'
 import {action as deleteProductAction} from './pages/ProductDetailsPage'
@@ -35,12 +34,12 @@ function App() {
       children: [
         {
           path: '/',
-          element: <Home />,
-          loader:  productsLoader,
+          element: <Welcome />,
         },
         {
-          path: 'welcome',
-          element: <Welcome />
+          path: '/products',
+          element: <ProductsPage />,
+          loader:  productsLoader,
         },
         { path: 'profile',
           element: (

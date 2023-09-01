@@ -134,5 +134,5 @@ export const action = async ({request, params}) => {
     }
     const responseData = await response.json()
     console.log(responseData)
-    return redirect('..')
+    return redirect('../products')
   }

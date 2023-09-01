@@ -59,5 +59,5 @@ export const action = async ({request, params}) => {
             uid: responseData?.user.uid
         }
     ))
-    return redirect ('/welcome')
+    return redirect ('..')
 }

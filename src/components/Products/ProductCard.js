@@ -2,11 +2,12 @@ import { ButtonGroup, Card, CardBody, CardFooter, Divider, Text, Heading, Image,
 import React from 'react'
 import { cartSliceActions } from '../../store/cart/cartSlice'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ProductImage from './ProductImage'
 import ProductDescription from './ProductDescription'
 import ProductTitle from './ProductTitle'
 import PriceComponent from './PriceComponent'
+import {useSelector} from 'react-redux'
 
 export default function ProductCard({product}) {
 
@@ -15,8 +16,16 @@ export default function ProductCard({product}) {
         dispatch(cartSliceActions.addToCart({product: product}))
     }
 
+    const navigate = useNavigate()
+
+    const navigateToLogin = () => {
+        navigate('/auth?mode=login')
+    }
+
+    const {isLoggedIn} = useSelector(state => state.auth)
+
   return (
-    <Card overflow={'hidden'} key={product._id} maxWidth={"400px"}>
+    <Card overflow={'hidden'} key={product._id} maxWidth={"400px"} _hover={{filter: "drop-shadow(0px 2px 1px grey)"}} cursor={"pointer"}>
         <CardBody>
         <Link to={`/product/${product._id}`}>
             <ProductImage src={product.image} alt={product.title} />
@@ -27,13 +36,17 @@ export default function ProductCard({product}) {
             </Stack>
         </Link>
         </CardBody>
-        <CardFooter marginTop={".25rem"}>
-            <HStack>
-                <Button variant='ghost' colorScheme='blue' border={'1px solid'} onClick={handleAddToCart}>
-                    Add to cart
-                </Button>
-                <PriceComponent price={product?.price} color={'blue.600'} fontSize={'1.4rem'} marginBottom={"0"} />
-            </HStack>
+        <CardFooter paddingTop={"0"} justifyContent={"space-between"}>
+                {isLoggedIn ? 
+                    <Button variant='ghost' colorScheme='brand' border={'1px solid'} onClick={handleAddToCart} _hover={{backgroundColor: "brand.300", color: "black", border: "transparent"}}>
+                        Add to cart
+                    </Button>
+                :
+                    <Button variant='ghost' colorScheme='brand' border={'1px solid'} onClick={navigateToLogin} _hover={{backgroundColor: "brand.300", color: "black", border: "transparent"}}>
+                        Login
+                    </Button>
+                }
+                <PriceComponent price={product?.price} color={'brand.300'} fontSize={'1.4rem'} marginBottom={"0"} fontWeight={500} />
         </CardFooter>
     </Card>
   )

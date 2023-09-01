@@ -15,7 +15,7 @@ export const loader = async () => {
   }
 }
 
-export default function Home() {
+export default function ProductsPage() {
 
   const data = useLoaderData()
   const products = data.products

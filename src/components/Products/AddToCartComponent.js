@@ -8,7 +8,7 @@ export default function AddToCartComponent(props) {
         <Button variant='ghost' colorScheme='blue' border={'1px solid'} onClick={props.onClick}>
             Add to cart
         </Button>
-        <PriceComponent price={props.price} color='blue.600' fontSize={'1.4rem'} marginBottom={"0"} />
+        <PriceComponent price={props.price} color={"brand.300"} fontSize={'1.4rem'} marginBottom={"0"} />
     </HStack>
   )
 }

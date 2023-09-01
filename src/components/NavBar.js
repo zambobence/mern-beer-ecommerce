@@ -77,9 +77,9 @@ export default function NavBar() {
 
   let Links
   if (auth.isLoggedIn){
-    Links = [{label: 'Products', target: '/'}, {label: 'Profile', target: '/profile'}, {label: 'Add product', target: '/add-product'}]
+    Links = [{label: 'Home', target: '/'}, {label: 'Products', target: '/products'}, {label: 'Profile', target: '/profile'}, {label: 'Add product', target: '/add-product'}]
   } else {
-    Links = [{label: 'Authentication', target: '/auth?mode=login'}]
+    Links = [{label: 'Home', target: '/'}, {label: 'Products', target: '/products'}, {label: 'Authentication', target: '/auth?mode=login'}]
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -119,7 +119,7 @@ export default function NavBar() {
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
               {Links.map((link) => (
-                <NavLinkComponent key={link.label} to={link.target}>{link.label}</NavLinkComponent>
+                <NavLinkComponent key={link.label} to={link.target} >{link.label}</NavLinkComponent>
               ))}
               {isLoggedIn && <LogoutBtn onClick={handleLogout} />}
             </Stack>
